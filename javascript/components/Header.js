@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 import { Fonts } from '../../src/utils/Fonts'
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
  },
  headerText: {
    color: '#fff',
-   fontFamily: Fonts.Satisfy,
+   fontFamily: 'sans-serif-light',
    elevation: 200,
    fontSize: 30,
  }

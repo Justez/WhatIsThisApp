@@ -1,32 +1,21 @@
 'use strict'
 
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { StyleSheet, View } from 'react-native'
 
 import {
+  Footer,
   Header,
-  History,
-  OfflineNotice,
 } from './components'
 
-class App extends Component {
+import Pages from './Pages'
 
-  componentDidMount() {
-    // TODO: check Connection
-    // TODO: render views respectively
-  }
-
-  render() {
-    return (
-      <View style={ styles.container }>
-
-        <Header />
-        <History />
-      </View>
-    )
-  }
-}
+const App = () =>
+  <View style={ styles.container }>
+    <Header />
+    <Pages />
+    <Footer />
+  </View>
 
 const styles = StyleSheet.create({
   container: {
@@ -37,7 +26,4 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => ({
-})
-
-export default connect(mapStateToProps)(App)
+export default App
