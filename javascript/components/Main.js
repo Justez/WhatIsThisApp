@@ -8,12 +8,18 @@ class Main extends Component {
     return (
       <View style={styles.mainStyle}>
         <View style={styles.textSection}>
-          <Text>sonme</Text>
+          <Text style={styles.text}>
+            Pick up the magnifying glass
+          </Text>
+          <Text style={styles.text}>
+            and start investigating!
+          </Text>
         </View>
         <View style={styles.buttonSection}>
           <View style={styles.circleShape}>
           </View>
           <View style={styles.circleShape}>
+
           </View>
         </View>
       </View>
@@ -26,10 +32,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
+  text: {
+    fontFamily:'serif',
+    fontSize: 25,
+    fontStyle: 'italic'
+  },
   textSection: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 2
+    flex: 2,
+    height: '60%'
   },
   buttonSection: {
     flexDirection: 'row-reverse',
