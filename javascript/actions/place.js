@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { ADD_PLACE } from './types'
 
 export const addPlace = placeName => {

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Text, Dimensions, StyleSheet, ToastAndroid } from 'react-native'
-const { width } = Dimensions.get('window')
+import { View, Text, StyleSheet, } from 'react-native'
 
 MiniOfflineSign = () =>
  <View style={styles.offlineContainer}>
@@ -13,13 +12,11 @@ const OfflineNotice = () =>
 const styles = StyleSheet.create({
  offlineContainer: {
    backgroundColor: '#b52424',
+   flexDirection: 'row',
    height: 30,
    justifyContent: 'center',
    alignItems: 'center',
-   flexDirection: 'row',
-   width,
-   position: 'absolute',
-   top: 30
+   width: '100%'
  },
  offlineText: {
    color: '#fff'
