@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-
-import { Fonts } from '../../src/utils/Fonts'
+import { Fonts } from '../../assets/fonts'
 import { displayName } from '../../app'
 
 const Header = () =>
@@ -20,9 +19,8 @@ const styles = StyleSheet.create({
  },
  headerText: {
    color: '#fff',
-   fontFamily: 'sans-serif-light',
-   elevation: 200,
-   fontSize: 30,
+   fontFamily: Fonts.DancingBold,
+   fontSize: 40,
  }
 })
 

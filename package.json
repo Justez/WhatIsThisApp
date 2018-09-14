@@ -16,11 +16,15 @@
     "react-native": "^0.55.4",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "shoutem": "0.0.1",
     "watchman": "^1.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^9.0.0",
     "babel-jest": "23.6.0",
     "babel-preset-react-native": "4.0.1",
+    "eslint": "^5.5.0",
+    "eslint-plugin-react": "^7.11.1",
     "jest": "23.6.0",
     "react-test-renderer": "16.3.1"
   },

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, } from 'react-native'
 
-MiniOfflineSign = () =>
+const MiniOfflineSign = () =>
  <View style={styles.offlineContainer}>
    <Text style={styles.offlineText}>No Internet Connection</Text>
  </View>

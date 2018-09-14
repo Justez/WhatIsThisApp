@@ -14,9 +14,13 @@ import { addPlace } from '../actions/place'
 import HistoryItem from './HistoryItem'
 
 class History extends Component {
-  state = {
-    placeName: '',
-    places: []
+  constructor(props) {
+    super(props)
+
+    this.state={
+      placeName: '',
+      places: []
+    }
   }
 
   // TODO: reduxForm

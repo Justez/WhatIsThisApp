@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Fonts } from '../../assets/fonts'
 import { StyleSheet, Text, View } from 'react-native'
 
 class Main extends Component {
@@ -33,9 +34,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   text: {
-    fontFamily:'serif',
-    fontSize: 25,
-    fontStyle: 'italic'
+    fontFamily: Fonts.Dancing,
+    fontSize: 28,
   },
   textSection: {
     alignItems: 'center',
@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   circleShape: {
-    marginStart: 90,
-    marginEnd: 90,
-    width: 70,
-    height: 70,
+    marginStart: 80,
+    marginEnd: 80,
+    width: 75,
+    height: 75,
     borderRadius: 100,
     backgroundColor: '#00BCD4'
   }
