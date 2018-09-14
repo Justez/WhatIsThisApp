@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 2,
-    height: '60%'
+    height: '70%'
   },
   buttonSection: {
     flexDirection: 'row-reverse',

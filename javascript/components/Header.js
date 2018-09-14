@@ -10,7 +10,6 @@ const Header = () =>
 
 const styles = StyleSheet.create({
  headerContainer: {
-   backgroundColor: '#F9A42B',
    flexDirection: 'row',
    height: "10%",
    justifyContent: 'center',
@@ -18,7 +17,6 @@ const styles = StyleSheet.create({
    width: '100%',
  },
  headerText: {
-   color: '#fff',
    fontFamily: Fonts.DancingBold,
    fontSize: 40,
  }
