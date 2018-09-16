@@ -14,9 +14,10 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "^0.55.4",
+    "react-native-ui-kitten": "^3.0.1",
+    "react-native-vector-icons": "^5.0.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "shoutem": "0.0.1",
     "watchman": "^1.0.0"
   },
   "devDependencies": {

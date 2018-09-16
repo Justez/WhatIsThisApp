@@ -1,41 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Fonts } from '../../assets/fonts'
 import { StyleSheet, Text, View } from 'react-native'
+import { RkButton, RkText } from 'react-native-ui-kitten'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-class Main extends Component {
-
-  render() {
-    return (
-      <View style={styles.mainStyle}>
-        <View style={styles.textSection}>
-          <Text style={styles.text}>
-            Pick up the magnifying glass
-          </Text>
-          <Text style={styles.text}>
-            and start investigating!
-          </Text>
-        </View>
-        <View style={styles.buttonSection}>
-          <View style={styles.circleShape}>
-          </View>
-          <View style={styles.circleShape}>
-
-          </View>
-        </View>
-      </View>
-    )
-  }
-}
+const Main = () =>
+  <View style={styles.mainStyle}>
+    <View style={styles.textSection}>
+      <RkText>
+        Pick up the magnifying glass
+      </RkText>
+      <RkText>
+        and start investigating!
+      </RkText>
+    </View>
+    <View style={styles.buttonSection}>
+      <RkButton>
+        <Icon name="search" size={40} color="#fff" />
+      </RkButton>
+    </View>
+  </View>
 
 const styles = StyleSheet.create({
   mainStyle: {
     flex: 1,
     flexDirection: 'column',
-  },
-  text: {
-    fontFamily: Fonts.Dancing,
-    fontSize: 28,
   },
   textSection: {
     alignItems: 'center',
@@ -48,14 +37,6 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     justifyContent: 'space-between',
     flex: 1,
-  },
-  circleShape: {
-    marginStart: 80,
-    marginEnd: 80,
-    width: 75,
-    height: 75,
-    borderRadius: 100,
-    backgroundColor: '#00BCD4'
   }
 })
 
