@@ -13,17 +13,34 @@ class Pages extends Component {
   componentWillUpdate() {
   }
 
+  getComponent = () => {
+    switch (this.props.viewName) {
+      case 'main':
+        return <Main />
+        break
+      case 'favourites':
+        return <Main />
+        break
+      case 'history':
+        return <History />
+        break
+      default:
+        return <Main />
+    }
+  }
+
   render() {
     return (
       <View>
-        <Main />
+        {this.getComponent()}
       </View>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  places: state.places.places
+  places: state.places.places,
+  viewName: state.views.viewSelected
 })
 
 const mapDispatchToProps = dispatch => {

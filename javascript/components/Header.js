@@ -1,21 +1,22 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { connect } from 'react-redux'
 import { displayName } from '../../app'
 import { RkTheme, RkText, RkTabView } from 'react-native-ui-kitten'
 
-const dimensions = Dimensions.get('window').width < 400
-
-const Header = () =>
+const Header = (props) =>
   <View>
     <RkText rkType='basicHeader'>{displayName}</RkText>
     <View style={styles.navigation}>
-      <RkTabView rkType='material nav' onTabChanged={(index) => console.warn(index)}>
+      <RkTabView rkType='material nav' onTabChanged={(index) => props.setView(index)}>
         <RkTabView.Tab title={'Search'}/>
         <RkTabView.Tab title={'Favourites'}/>
         <RkTabView.Tab title={'History'}/>
       </RkTabView>
     </View>
   </View>
+
+const dimensions = Dimensions.get('window').width < 400
 
 RkTheme.setType('RkText', 'basicHeader', {
   alignSelf: 'center',
@@ -58,4 +59,12 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Header
+const mapDispatchToProps = dispatch => {
+  return {
+    setView: (index) => {
+      dispatch(setView(index))
+    }
+  }
+}
+
+export default connect(undefined, mapDispatchToProps)(Header)
