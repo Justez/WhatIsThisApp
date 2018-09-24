@@ -3,7 +3,13 @@ import { ADD_ITEM } from '../actions/types'
 
 const initialState = {
   itemName: '',
-  items: []
+  items: [
+    {key: Math.random(), value: 'one'},
+    {key: Math.random(), value: 'two'},
+    {key: Math.random(), value: 'three'},
+    {key: Math.random(), value: 'four'},
+    {key: Math.random(), value: 'five'},
+  ]
 }
 
 const historyReducer = (state = initialState, action) => {

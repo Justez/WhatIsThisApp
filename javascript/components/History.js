@@ -10,7 +10,7 @@ import {
 
 import { addItem } from '../actions/history'
 import HistoryItem from './HistoryItem'
-import { RkTextInput, RkTheme } from 'react-native-ui-kitten'
+import { RkText, RkTextInput, RkTheme } from 'react-native-ui-kitten'
 
 class History extends Component {
   constructor(props) {
@@ -21,35 +21,37 @@ class History extends Component {
       items: []
     }
   }
-  // TODO: reduxForm
 
-  historySubmitHandler = () =>
+  historySearchHandler = () =>
     this.state.itemName.trim() !== ''
-    && this.props.addItem(this.state.itemName)
-
-  historyNameChangeHandler = (value) =>
-    this.setState({ itemName: value })
+    // && this.props.addItem(this.state.itemName)
 
   render() {
-    return (
-      <View style = {{ width: '100%' }}>
-        <RkTextInput
-          rkType= "frame"
-          placeholder='Search...'
-        />
-        <Button title = 'Search'
-          onPress = {this.historySubmitHandler}
-        />
-        <FlatList
-          data = {this.props.items}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem = { info =>
-            <HistoryItem
-              itemName={info.item.value}
-            />
-          }
-        />
-      </View>
+    if (this.props.items && this.props.items.length > 0)
+      return (
+        <View style={{ width: '100%' }}>
+          <RkTextInput
+            rkType="frame"
+            placeholder='Search...'
+          />
+          <Button title='Search'
+            onPress={this.historySearchHandler}
+          />
+          <FlatList
+            data = {this.props.items}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={(info) =>
+              <HistoryItem
+                itemName={info.item.value}
+              />
+            }
+          />
+        </View>
+      )
+    else return (
+      <RkText>
+        Nothing here yet!
+      </RkText>
     )
   }
 }
