@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 const HistoryItem = (props) =>
   <TouchableOpacity>
     <View style = { styles.historyItem }>
-      <Text>{ props.placeName }</Text>
+      <Text>{ props.itemName }</Text>
     </View>
   </TouchableOpacity>
 

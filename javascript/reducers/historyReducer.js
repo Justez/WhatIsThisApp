@@ -1,17 +1,17 @@
 import React from 'react'
-import { ADD_PLACE } from '../actions/types'
+import { ADD_ITEM } from '../actions/types'
 
 const initialState = {
-  placeName: '',
-  places: []
+  itemName: '',
+  items: []
 }
 
-const placeReducer = (state = initialState, action) => {
+const historyReducer = (state = initialState, action) => {
   switch(action.type) {
-    case ADD_PLACE:
+    case ADD_ITEM:
       return {
         ...state,
-        places: state.places.concat({
+        items: state.items.concat({
           key: Math.random(),
           value: action.payload
         })
@@ -21,4 +21,4 @@ const placeReducer = (state = initialState, action) => {
   }
 }
 
-export default placeReducer
+export default historyReducer

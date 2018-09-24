@@ -10,6 +10,8 @@ import {
 
 class Pages extends Component {
 
+  // TODO: component did mount async func get records
+
   componentWillUpdate() {
   }
 
@@ -39,16 +41,7 @@ class Pages extends Component {
 }
 
 const mapStateToProps = state => ({
-  places: state.places.places,
-  viewName: state.views.viewSelected
+  viewName: state.navigation.viewSelected
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addPlace: (name) => {
-      dispatch(addPlace(name))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Pages)
+export default connect(mapStateToProps)(Pages)

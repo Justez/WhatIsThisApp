@@ -1,11 +1,11 @@
 import React from 'react'
 import { createStore, combineReducers } from 'redux'
-import placeReducer from './reducers/placeReducer'
+import historyReducer from './reducers/historyReducer'
 import navigationReducer from './reducers/navigationReducer'
 
 const rootReducer = combineReducers({
-  places: placeReducer,
-  views: navigationReducer
+  history: historyReducer,
+  navigation: navigationReducer
 })
 
 const configureStore = () => {

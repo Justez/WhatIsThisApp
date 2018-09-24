@@ -16,7 +16,7 @@ const navigationReducer = (state = initialState, action) => {
     case SET_VIEW:
       return {
         ...state,
-        viewSelected: views[action.payload].name
+        viewSelected: views[action.payload] && views[action.payload].name || 'main'
       }
     default:
       return state

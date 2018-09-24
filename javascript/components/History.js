@@ -5,81 +5,72 @@ import { connect } from 'react-redux'
 import {
   Button,
   FlatList,
-  StyleSheet,
   View,
-  TextInput
 } from 'react-native';
 
-import { addPlace } from '../actions/place'
+import { addItem } from '../actions/history'
 import HistoryItem from './HistoryItem'
+import { RkTextInput, RkTheme } from 'react-native-ui-kitten'
 
 class History extends Component {
   constructor(props) {
     super(props)
 
     this.state={
-      placeName: '',
-      places: []
+      itemName: '',
+      items: []
     }
   }
-
   // TODO: reduxForm
 
-  placeSubmitHandler = () =>
-    this.state.placeName.trim() !== ''
-    && this.props.addPlace(this.state.placeName)
+  historySubmitHandler = () =>
+    this.state.itemName.trim() !== ''
+    && this.props.addItem(this.state.itemName)
 
-  placeNameChangeHandler = (value) =>
-    this.setState({ placeName: value })
+  historyNameChangeHandler = (value) =>
+    this.setState({ itemName: value })
 
   render() {
     return (
-      <View style = { styles.inputContainer }>
-      <FlatList style = { styles.historyContainer }
-        data = { this.props.places }
-        keyExtractor={(item, index) => index.toString()}
-        renderItem = { info =>
-          <HistoryItem
-          placeName={ info.item.value }
-          />
-        }
-      />
-        <TextInput
-          placeholder = "Search Places"
-          style = { styles.placeInput }
-          value = { this.state.placeName }
-          onChangeText = { this.placeNameChangeHandler }
-        ></TextInput>
-        <Button title = 'Add Search'
-          style = { styles.placeButton }
-          onPress = { this.placeSubmitHandler }
+      <View style = {{ width: '100%' }}>
+        <RkTextInput
+          rkType= "frame"
+          placeholder='Search...'
         />
-
+        <Button title = 'Search'
+          onPress = {this.historySubmitHandler}
+        />
+        <FlatList
+          data = {this.props.items}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem = { info =>
+            <HistoryItem
+              itemName={info.item.value}
+            />
+          }
+        />
       </View>
     )
   }
 }
-const styles = StyleSheet.create({
-  inputContainer: {
+
+RkTheme.setType('RkTextInput', 'frame', {
+  input: {
+    backgroundColor: 'white',
+  },
+  container: {
     width: '100%',
-  },
-  historyContainer: {
-  },
-  placeInput: {
-  },
-  placeButton: {
-    borderRadius: 2
   }
 })
 
 const mapStateToProps = state => ({
-  places: state.places.places
+  items: state.history.items
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    addPlace: (name) => {
-      dispatch(addPlace(name))
+    addItem: (name) => {
+      dispatch(addItem(name))
     }
   }
 }

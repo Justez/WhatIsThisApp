@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
+import { setView } from '../actions/navigation'
 import { displayName } from '../../app'
 import { RkTheme, RkText, RkTabView } from 'react-native-ui-kitten'
 

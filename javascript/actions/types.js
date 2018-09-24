@@ -1,7 +1,7 @@
-const ADD_PLACE = 'ADD_PLACE'
+const ADD_ITEM = 'ADD_ITEM'
 const SET_VIEW = 'SET_VIEW'
 
 export {
-  ADD_PLACE,
+  ADD_ITEM,
   SET_VIEW
 }
