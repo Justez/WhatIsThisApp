@@ -2,11 +2,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import {
-  Button,
-  FlatList,
-  View,
-} from 'react-native';
+import { FlatList, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { addItem } from '../actions/history'
 import HistoryItem from './HistoryItem'
@@ -15,27 +12,15 @@ import { RkText, RkTextInput, RkTheme } from 'react-native-ui-kitten'
 class History extends Component {
   constructor(props) {
     super(props)
-
-    this.state={
-      itemName: '',
-      items: []
-    }
   }
-
-  historySearchHandler = () =>
-    this.state.itemName.trim() !== ''
-    // && this.props.addItem(this.state.itemName)
 
   render() {
     if (this.props.items && this.props.items.length > 0)
       return (
         <View style={{ width: '100%' }}>
           <RkTextInput
-            rkType="frame"
             placeholder='Search...'
-          />
-          <Button title='Search'
-            onPress={this.historySearchHandler}
+            label={<Icon name={'search'}/>}
           />
           <FlatList
             data = {this.props.items}
@@ -56,11 +41,15 @@ class History extends Component {
   }
 }
 
-RkTheme.setType('RkTextInput', 'frame', {
+RkTheme.setType('RkTextInput', 'basic', {
   input: {
     backgroundColor: 'white',
   },
+  label: {
+    marginRight: 0
+  },
   container: {
+    paddingLeft: 10,
     width: '100%',
   }
 })
