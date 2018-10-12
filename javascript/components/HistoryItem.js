@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { changeItemFavourite } from '../actions/history'
 import { View, Dimensions, TouchableOpacity } from 'react-native';
 import { RkCard, RkTheme, RkText, RkButton } from 'react-native-ui-kitten'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -17,8 +19,9 @@ const HistoryItem = (props) =>
         </RkText>
       </View>
       <View rkCardFooter>
-        {/*// TODO: if already favourited change color*/}
-        <Icon name="heart" size={25} color="lightgrey" />
+        <TouchableOpacity onPress={() => props.changeItemFavourite(props.item.key)}>
+          <Icon name="heart" size={25} color={props.item.favourite ? "lightpink" : "lightgrey"} />
+        </TouchableOpacity>
         <Icon name="location-arrow" size={25} color="lightgrey" />
       </View>
     </RkCard>
@@ -46,4 +49,8 @@ const HistoryItem = (props) =>
     fontSize: dimensions ? 20 : 30
   })
 
-export default HistoryItem
+const mapDispatchToProps = dispatch => ({
+    changeItemFavourite: (key) => { dispatch(changeItemFavourite(key)) }
+  })
+
+export default connect(undefined, mapDispatchToProps)(HistoryItem)

@@ -1,40 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { loadItems, resetItems, searchItems } from '../actions/history'
 
 import { FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import { addItem } from '../actions/history'
 import HistoryItem from './HistoryItem'
 import { RkText, RkTextInput, RkTheme } from 'react-native-ui-kitten'
 
 class History extends Component {
-  state = {
-    searchValue: '',
-    searchedItems: []
-  }
-
   componentDidMount() {
-    this.setState({ searchedItems: this.props.items.map((item) => ({
-        key: item.key,
-        value: item.value,
-        description: item.description.substr(1, 100) + '...'
-      }))
-    })
+    this.props.loadItems()
   }
 
-  search = searchValue => {// TODO: add debounce
-    this.setState({ searchValue })
-    //// TODO: promise search
-
-    this.setState({ searchedItems: this.state.searchValue
-      ? this.state.searchedItems.filter(item => item.value.includes(this.state.searchValue))
-      : this.state.searchedItems
-    })
+  componentWillUnmount() {
+    this.props.resetItems()
   }
+
+  search = searchValue => // TODO: add debounce ?
+    // TODO: might store results in state?
+    this.props.searchItems(searchValue)
 
   render() {
-    if (this.props.items && this.props.items.length > 0)
+    if (this.props.itemCount > 0)
       return (
         <View style={{ width: '100%', flex: 1 }}>
           <RkTextInput
@@ -43,9 +31,9 @@ class History extends Component {
             maxLength={30}
             onChangeText={searchValue => this.search(searchValue)}
           />
-          {this.state.searchedItems &&
+          {this.props.items &&
             <FlatList
-              data={this.state.searchedItems}
+              data={this.props.items}
               keyExtractor={(item, index) => index.toString()}
               renderItem={(info) => <HistoryItem item={info.item}/>}
             />
@@ -78,11 +66,14 @@ RkTheme.setType('RkText', 'suggestion', {
 })
 
 const mapStateToProps = state => ({
-  items: state.history.items
+  itemCount: state.history.itemCount,
+  items: state.history.items,
 })
 
 const mapDispatchToProps = dispatch => ({
-  addItem: (name) => { dispatch(addItem(name)) }
+  loadItems: () => { dispatch(loadItems()) },
+  resetItems: () => { dispatch(resetItems()) },
+  searchItems: (query) => { dispatch(searchItems(query)) },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(History)

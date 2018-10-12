@@ -1,5 +1,4 @@
 import React from 'react'
-import { SET_VIEW } from '../actions/types'
 
 const views = {
   '0': { name: 'main' },
@@ -8,12 +7,12 @@ const views = {
 }
 
 const initialState = {
-  viewSelected: views[0].name
+  viewSelected: views[2].name
 }
 
 const navigationReducer = (state = initialState, action) => {
   switch(action.type) {
-    case SET_VIEW:
+    case 'SET_VIEW':
       return {
         ...state,
         viewSelected: views[action.payload] && views[action.payload].name || 'main'
