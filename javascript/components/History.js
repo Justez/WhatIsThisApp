@@ -22,7 +22,7 @@ class History extends Component {
     this.props.searchItems(searchValue)
 
   render() {
-    if (this.props.itemCount > 0)
+    if (this.props.itemKeys)
       return (
         <View style={{ width: '100%', flex: 1 }}>
           <RkTextInput
@@ -66,7 +66,7 @@ RkTheme.setType('RkText', 'suggestion', {
 })
 
 const mapStateToProps = state => ({
-  itemCount: state.history.itemCount,
+  itemKeys: state.history.itemKeys,
   items: state.history.items,
 })
 
