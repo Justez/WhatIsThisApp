@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 const dimensions = Dimensions.get('window').width < 400
 
 const HistoryItem = (props) =>
-  <TouchableOpacity onPress={() => console.warn()}>
+  <TouchableOpacity onPress={() => {}}>
     <RkCard rkType='story'>
       <View rkCardHeader>
         <RkText rkType='header'>{props.item.value}</RkText>

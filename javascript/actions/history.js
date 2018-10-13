@@ -88,10 +88,12 @@ export function loadItems() {
           ? undefined
           : keys.filter(key => key.includes('history'))
         })
-        .then((results) =>
+        .then(results =>
           AsyncStorage.multiGet(results, (errors, response) => {
-            const maps = response.map(item => ({ [item[0]]: omit(JSON.parse(item[1]), 'key') }))
-            maps.length > 0 && (payload = assign({}, ...maps))
+            payload = response.map(item => ({
+              key: item[0],
+              value: omit(JSON.parse(item[1]), 'key')
+            }))
           })
         )
 
@@ -100,9 +102,9 @@ export function loadItems() {
         payloadKeys,
         payload
       })
-    } catch (error) {
+    } catch (error) {// TODO: add error dispatch
       dispatch({
-        type: 'LOAD_ITEMS' // TODO: add error dispatch
+        type: 'LOAD_ITEMS'
       })
     }
   };

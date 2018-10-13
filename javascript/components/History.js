@@ -22,7 +22,7 @@ class History extends Component {
     this.props.searchItems(searchValue)
 
   render() {
-    if (this.props.itemKeys)
+    if (this.props.itemKeys && this.props.items)
       return (
         <View style={{ width: '100%', flex: 1 }}>
           <RkTextInput
@@ -34,7 +34,7 @@ class History extends Component {
           {this.props.items &&
             <FlatList
               data={this.props.items}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(item, index) => item.key}
               renderItem={(info) => <HistoryItem item={info.item}/>}
             />
           }
