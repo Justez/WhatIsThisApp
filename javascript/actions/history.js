@@ -2,50 +2,6 @@ import React from 'react'
 import { AsyncStorage } from 'react-native'
 import { assign, omit } from 'lodash'
 
-const storage = [
-  {
-    description:
-      '1 (one, also called unit, unity, and (multiplicative) identity) is a number, numeral, and glyph. It represents a single entity, the unit of counting or measurement. For example, a line segment of unit length is a line segment of length 1. It is also the first of the infinite sequence of natural numbers, followed by 2.',
-    favourite: false,
-    key: Math.random(),
-    searchedAt: undefined,
-    source: '',
-    value: 'one'
-  },
-  {
-    description: '2 (two) is a number, numeral, and glyph. It is the natural number following 1 and preceding 3.',
-    favourite: true,
-    key: Math.random(),
-    searchedAt: undefined,
-    source: '',
-    value: 'two'
-  },
-  {
-    description: '3 (three) is a number, numeral, and glyph. It is the natural number following 2 and preceding 4.',
-    favourite: true,
-    key: Math.random(),
-    searchedAt: undefined,
-    source: '',
-    value: 'three'
-  },
-  {
-    description: '4 (four) is a number, numeral, and glyph. It is the natural number following 3 and preceding 5.',
-    favourite: false,
-    key: Math.random(),
-    searchedAt: undefined,
-    source: '',
-    value: 'four'
-  },
-  {
-    description: '5 (five) is a number, numeral, and glyph. It is the natural number following 4 and preceding 6.',
-    favourite: false,
-    key: Math.random(),
-    searchedAt: undefined,
-    source: '',
-    value: 'five'
-  },
-]
-
 export function addItem(itemName) {
   return {
     type: 'ADD_ITEM',
@@ -83,17 +39,18 @@ export function loadItems() {
     try {
       let payloadKeys = []
       let payload = undefined
+
       const result = await AsyncStorage.getAllKeys((error, keys) => {
-          payloadKeys = error
-          ? undefined
-          : keys.filter(key => key.includes('history'))
+          payloadKeys = error ? undefined : keys.filter(key => key.includes('history'))
         })
         .then(results =>
           AsyncStorage.multiGet(results, (errors, response) => {
-            payload = response.map(item => ({
-              key: item[0],
-              value: omit(JSON.parse(item[1]), 'key')
-            }))
+            payload = response.map(item => {
+              let value = omit(JSON.parse(item[1]), 'key')
+              value.description = value.description.substring(0, 100) + '...'
+              return { key: item[0], value }
+            })
+            // TODO: sort and pick only 10 first
           })
         )
 

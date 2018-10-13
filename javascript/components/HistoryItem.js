@@ -7,20 +7,20 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 const dimensions = Dimensions.get('window').width < 400
 
-const HistoryItem = (props) =>
+const HistoryItem = ({ item, changeItemFavourite }) =>
   <TouchableOpacity onPress={() => {}}>
     <RkCard rkType='story'>
       <View rkCardHeader>
-        <RkText rkType='header'>{props.item.value}</RkText>
+        <RkText rkType='header'>{item.value.name}</RkText>
       </View>
       <View rkCardContent>
         <RkText rkType='description'>
-          {props.item.description}
+          {item.value.description}
         </RkText>
       </View>
       <View rkCardFooter>
-        <TouchableOpacity onPress={() => props.changeItemFavourite(props.item.key)}>
-          <Icon name="heart" size={25} color={props.item.favourite ? "lightpink" : "lightgrey"} />
+        <TouchableOpacity onPress={() => changeItemFavourite(item.key)}>
+          <Icon name="heart" size={25} color={item.value.favourite ? "lightpink" : "lightgrey"} />
         </TouchableOpacity>
         <Icon name="location-arrow" size={25} color="lightgrey" />
       </View>
