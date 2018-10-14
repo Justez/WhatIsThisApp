@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { loadItems, resetItems, searchItems } from '../actions/history'
 
 import { AsyncStorage } from 'react-native'
-import { FlatList, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import HistoryItem from './HistoryItem'
@@ -55,50 +55,40 @@ const storage = [
 
 class History extends Component {
   componentDidMount() {
+    // TODO: remove
+    AsyncStorage.clear()
+    AsyncStorage.multiSet(
+      storage.map(item => [`@history:${item.key}`, JSON.stringify(item)]),
+      (error) => error && console.warn(error)
+    )
+    //
     this.props.loadItems()
-    // AsyncStorage.clear()
-    // AsyncStorage.multiSet(
-    //   storage.map(item => [`@history:${item.key}`, JSON.stringify(item)]),
-    //   (error) => console.warn(error)
-    // )
   }
 
   componentWillUnmount() {
     this.props.resetItems()
   }
 
-  search = searchValue => // TODO: add debounce ?
-    // TODO: might store results in state?
+  search = searchValue => // TODO: add debounce
     this.props.searchItems(searchValue)
 
   render() {
-    if (this.props.itemKeys && this.props.items)
+    if (this.props.historyPresent)
       return (
         <View style={{ width: '100%', flex: 1 }}>
-          {this.props.items.length > 0
-            ? <View style={{ width: '100%', flex: 1 }}>
-                <RkTextInput
-                  placeholder='Search...'
-                  label={<Icon name={'search'}/>}
-                  maxLength={30}
-                  onChangeText={searchValue => this.search(searchValue)}
-                />
-                <FlatList
-                  data={this.props.items}
-                  keyExtractor={(item, index) => index}
-                  renderItem={(info) => <HistoryItem item={info.item}/>}
-                />
-              </View>
-            : <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                }}
-              >
-                <RkText rkType="suggestion">
-                  Get back searching!
-                </RkText>
-              </View>
+          <RkTextInput
+            placeholder='Search...'
+            label={<Icon name={'search'}/>}
+            maxLength={30}
+            onChangeText={searchValue => this.search(searchValue)}
+          />
+          {this.props.historyItems.length > 0 &&
+            <ScrollView>
+              {this.props.historyItems.map(
+                item =>
+                  <HistoryItem key={item.key} item={item}/>
+              )}
+            </ScrollView>
           }
         </View>
       )
@@ -123,13 +113,9 @@ RkTheme.setType('RkTextInput', 'basic', {
   }
 })
 
-RkTheme.setType('RkText', 'suggestion', {
-  alighSelf: 'center',
-})
-
 const mapStateToProps = state => ({
-  itemKeys: state.history.itemKeys,
-  items: state.history.items,
+  historyPresent: state.history.historyPresent,
+  historyItems: state.history.items,
 })
 
 const mapDispatchToProps = dispatch => ({

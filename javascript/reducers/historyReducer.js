@@ -2,7 +2,7 @@ import React from 'react'
 
 const initialState = {
   itemName: '',
-  itemKeys: undefined,
+  historyPresent: false,
   items: [],
 }
 
@@ -11,8 +11,8 @@ const historyReducer = (state = initialState, action) => {
     case 'LOAD_ITEMS':
       return {
         ...state,
+        historyPresent: action.payloadPresent,
         items: action.payload,
-        itemKeys: action.payloadKeys
       }
     case 'ADD_ITEM': // TODO: item was already in list, pick and add to top of list
       return {
@@ -26,7 +26,13 @@ const historyReducer = (state = initialState, action) => {
     case 'CHANGE_ITEM_FAVOURITE':
       return {
         ...state,
-        items: action.payload
+        items: state.items.map(item => ({
+          ...item,
+          value: {
+            ...item.value,
+            favourite: (item.key == action.key) ? action.favourite : item.value.favourite
+          }
+        }))
       }
     case 'RESET_ITEMS':
       return {
@@ -36,8 +42,11 @@ const historyReducer = (state = initialState, action) => {
     case 'SEARCH_ITEMS':
       return {
         ...state,
-        items: storage.filter(item => item.value.includes(action.payload || ""))
+        items: action.payload
       }
+    case 'SET_DB_CONNECTION_ERROR':
+      return {} // TODO: finish with error notice like offline message
+
     default:
       return state
   }
